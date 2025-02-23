@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Edit Post</h2>
+
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <!-- Card Container for Form -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <!-- Content Field -->
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ form.content.id_for_label }}">Post Content</label>
+                            <textarea name="content" class="form-control" id="{{ form.content.id_for_label }}" rows="4">{{ form.content.value }}</textarea>
+                        </div>
+
+                        <!-- Image Field -->
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ form.image.id_for_label }}">Post Image (Optional)</label>
+                            <input type="file" name="image" class="form-control" id="{{ form.image.id_for_label }}">
+
+                            {% if post.image %}
+                                <div class="mt-3">
+                                    <p>Current Image:</p>
+                                    <img src="{{ post.image.url }}" alt="Post Image" class="img-fluid rounded mb-2">
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Submit and Cancel Buttons -->
+                        <button type="submit" class="btn btn-primary w-100">Update Post</button>
+                        <a href="{% url 'mypost' %}" class="btn btn-outline-secondary w-100 mt-2">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+</div>
+{% endblock %}

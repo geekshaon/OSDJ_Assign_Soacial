@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Current Feed</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {% for post in posts %}
+                <div class="card mb-4 p-3 shadow-lg border-0 rounded-4">
+                    <div class="card-header bg-white border-0 d-flex align-items-center">
+                        <!-- Profile Picture -->
+                        {% if post.user.profile.profile_picture %}
+                            <img src="{{ post.user.profile.profile_picture.url }}" alt="Profile Picture" 
+                                 class="rounded-circle me-2 border" width="50" height="50"
+                                 onerror="this.onerror=null;this.src='/static/default-profile.png';">
+                        {% else %}
+                            <img src="/static/default-profile.png" alt="Profile Picture" 
+                                 class="rounded-circle me-2 border" width="50" height="50">
+                        {% endif %}
+                        <div>
+                            <span class="fw-bold text-primary">{{ post.user.username }}</span>
+                            <small class="d-block text-muted">{{ post.created_at|date:"M d, Y" }} at {{ post.created_at|time:"h:i A" }}</small>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-dark">{{ post.content }}</p>
+                        {% if post.image %}
+                            <div class="text-center mt-3">
+                                <img src="{{ post.image.url }}" alt="Post Image" class="img-fluid rounded-3 shadow">
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% comment %} <div class="card-footer bg-white border-0 d-flex justify-content-between">
+                        <button class="btn btn-outline-primary btn-sm"><i class="bi bi-heart"></i> Like</button>
+                        <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-chat"></i> Comment</button>
+                    </div> {% endcomment %}
+                </div>
+            {% empty %}
+                <div class="text-center">
+                    <p class="text-muted">No posts available. Start by creating a new post!</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
