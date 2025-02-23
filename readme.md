@@ -73,7 +73,7 @@
 ![ERD](https://github.com/geekshaon/OSDJ_Assign_Soacial/blob/main/erd.png)
 
 
-Ensure the ER diagram image file is present in the `static/images/` directory of your project.
+
 
 ## Additional Notes
 - Make sure you have media file handling set up properly in Django settings.
